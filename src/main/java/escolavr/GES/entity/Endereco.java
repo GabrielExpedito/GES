@@ -12,7 +12,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class Endereco {
 
+    @Id
+    @Column(name = "CEP", unique = true)
     private Integer CEP;
+
     private String rua;
     private Integer NR;
     private String bairro;
