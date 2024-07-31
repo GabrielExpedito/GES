@@ -26,5 +26,11 @@ public class EnderecoService {
         return endereco.get();
    }
 
+   public void inseriEndereco(Endereco endereco) {
+        enderecoRepository.save(endereco);
+
+
+   }
+
 
 }
