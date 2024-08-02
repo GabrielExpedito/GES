@@ -27,6 +27,19 @@ public class EnderecoController {
         return ResponseEntity.status(HttpStatus.CREATED).body("Endereço inserido com sucesso");
     }
 
+    @DeleteMapping("{id}")
+    public ResponseEntity<String> deletarEndereco(@PathVariable(value = "id") Integer id) {
+        try {
+            enderecoService.deletarEndereco(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Endereco deletado com sucesso");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body("Erro ao deletar o endereco");
+        }
+    }
+
+
+
 
 
 }
