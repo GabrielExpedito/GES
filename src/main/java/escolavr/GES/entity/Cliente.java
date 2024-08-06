@@ -13,12 +13,19 @@ public class Cliente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_Cliente", unique = true)
-    private Integer ID_Cliente;
+    @Column(name = "id", unique = true)
+    private Integer id;
+
     private String nome;
+
     private Integer idade;
+
     private String telefone;
-    private Object Endereco;
+
+    @OneToOne(cascade = CascadeType.PERSIST)
+    @JoinColumn(name = "id_endereco")
+    private Endereco endereco;
+
     private String CPF;
 
 

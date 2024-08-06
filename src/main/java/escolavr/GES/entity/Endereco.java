@@ -14,13 +14,22 @@ public class Endereco {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", unique = true)
-    private Integer id;
+    @Column(name = "id_endereco", unique = true)
+    private Integer id_endereco;
+
     private Integer cep;
+
     private String rua;
+
     private Integer nr;
+
     private String bairro;
+
     private String cidade;
+
     private String estado;
+
+    @OneToOne(mappedBy = "endereco")
+    private Cliente cliente;
 
 }
