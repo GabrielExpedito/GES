@@ -29,7 +29,4 @@ public class Endereco {
 
     private String estado;
 
-    @OneToOne(mappedBy = "endereco")
-    private Cliente cliente;
-
 }

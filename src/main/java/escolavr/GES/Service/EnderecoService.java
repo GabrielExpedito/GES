@@ -26,9 +26,13 @@ public class EnderecoService {
         return endereco.get();
     }
 
-    public void inseriEndereco(Endereco endereco) {
-        enderecoRepository.save(endereco);
+    public Endereco inseriEndereco(Endereco endereco) {
+        return enderecoRepository.save(endereco);
+    }
 
+    public Optional<Endereco> acharEnderecoByDetalhes(Endereco endereco) {
+        return enderecoRepository.acharRuaECidadeEEstadoECep0(endereco.getCep(), endereco.getRua(), endereco.getNr(),
+                endereco.getBairro(), endereco.getCidade(), endereco.getEstado());
     }
 
     public void deletarEndereco(Integer id) {
