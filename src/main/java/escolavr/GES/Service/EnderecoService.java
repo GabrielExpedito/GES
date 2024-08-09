@@ -30,9 +30,8 @@ public class EnderecoService {
         return enderecoRepository.save(endereco);
     }
 
-    public Optional<Endereco> acharEnderecoByDetalhes(Endereco endereco) {
-        return enderecoRepository.acharRuaECidadeEEstadoECep0(endereco.getCep(), endereco.getRua(), endereco.getNr(),
-                endereco.getBairro(), endereco.getCidade(), endereco.getEstado());
+    public Endereco acharEnderecoByDetalhes(String rua, String cidade, String estado, Integer cep) {
+        return enderecoRepository.findEnderecoByRuaAndCidadeAndEstadoAndCep(rua, cidade, estado, cep);
     }
 
     public void deletarEndereco(Integer id) {

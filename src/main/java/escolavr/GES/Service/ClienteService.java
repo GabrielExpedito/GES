@@ -1,6 +1,7 @@
 package escolavr.GES.Service;
 
 import ch.qos.logback.core.net.server.Client;
+import escolavr.GES.DTO.ClienteComEnderecoDto;
 import escolavr.GES.entity.Cliente;
 import escolavr.GES.entity.Endereco;
 import escolavr.GES.repository.ClienteRepository;
@@ -38,17 +39,25 @@ public class ClienteService {
 
     public void inserirCliente(Cliente cliente) {
         validarEnderecoEInserirCliente(cliente);
+        //validar se cliente existe
+        //inserir cliente e endereco
     }
 
-    private void validarEnderecoEInserirCliente(Cliente cliente) {
-        Optional<Endereco> existirEndereco = enderecoService.acharEnderecoByDetalhes(cliente.getEndereco());
+    private void validarEnderecoEInserirCliente(ClienteComEnderecoDto clienteComEnderecoDto) {
+        Endereco existirEndereco = enderecoService.acharEnderecoByDetalhes(clienteComEnderecoDto.ge, clienteComEnderecoDto.getCidade(), clienteComEnderecoDto.getEstado(), clienteComEnderecoDto.getCep());
+        Cliente cliente = new Cliente();
 
-        if(existirEndereco.isPresent()) {
-            cliente.setEndereco(existirEndereco.get());
+        if(existirEndereco != null) {
+            cliente.setEnderece(existirEndereco);
         } else {
-            Endereco novoEndereco = enderecoService.inseriEndereco(cliente.getEndereco());
+            Endereco endereco = new Endereco();
+            endereco.setRua(clienteComEnderecoDto.getRua());
+
+            enderecoService.inseriEndereco(endereco);
             cliente.setEndereco(novoEndereco);
         }
+
+        cliente.setNome(clienteComEnderecoDto.getNome());
         clienteRepository.save(cliente);
     }
 
