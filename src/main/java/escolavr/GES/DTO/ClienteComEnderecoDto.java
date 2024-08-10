@@ -1,18 +1,22 @@
 package escolavr.GES.DTO;
 
-public class ClienteComEnderecoDto {
 
-    private String nome;
-    private Integer idade;
-    private String telefone;
-    private Integer id_endereco;
-    private Integer cep;
-    private String rua;
-    private Integer nr;
-    private String bairro;
-    private String cidade;
-    private String estado;
-    private String CPF;
+public record ClienteComEnderecoDto(
+         String nome,
+         Integer idade,
+         String telefone,
+         Integer id_endereco,
+         Integer cep,
+         String rua,
+         Integer nr,
+         String bairro,
+         String cidade,
+         String estado,
+         String CPF
+
+) {
+
+
 
 
 }

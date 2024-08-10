@@ -27,38 +27,59 @@ public class ClienteService {
 
     public Cliente obterClienteByID(Integer id) {
         Optional<Cliente> cliente = clienteRepository.findById(id);
-        if(cliente.isEmpty()) {
+        if (cliente.isEmpty()) {
             throw new RuntimeException("Não encontrado");
         }
         return cliente.get();
     }
 
     public void deletarCliente(Integer id) {
-       clienteRepository.deleteById(id);
+        clienteRepository.deleteById(id);
     }
 
-    public void inserirCliente(Cliente cliente) {
-        validarEnderecoEInserirCliente(cliente);
-        //validar se cliente existe
-        //inserir cliente e endereco
+    public void inserirCliente(ClienteComEnderecoDto clienteComEnderecoDto) {
+        Endereco endereco = getEnderecoIfExists(clienteComEnderecoDto);
+        enderecoService.inseriEndereco(endereco);
+        Cliente cliente = getClienteIfExits(clienteComEnderecoDto);
+        clienteRepository.save(cliente);
     }
 
-    private void validarEnderecoEInserirCliente(ClienteComEnderecoDto clienteComEnderecoDto) {
-        Endereco existirEndereco = enderecoService.acharEnderecoByDetalhes(clienteComEnderecoDto.ge, clienteComEnderecoDto.getCidade(), clienteComEnderecoDto.getEstado(), clienteComEnderecoDto.getCep());
-        Cliente cliente = new Cliente();
+    private Endereco getEnderecoIfExists(ClienteComEnderecoDto clienteComEnderecoDto) {
+        Endereco existirEndereco = enderecoService.acharEnderecoByDetalhes(clienteComEnderecoDto.cep(), clienteComEnderecoDto.rua(),
+                clienteComEnderecoDto.nr(), clienteComEnderecoDto.bairro(), clienteComEnderecoDto.cidade(), clienteComEnderecoDto.estado());
 
-        if(existirEndereco != null) {
-            cliente.setEnderece(existirEndereco);
+        if (existirEndereco != null) {
+            return existirEndereco;
         } else {
             Endereco endereco = new Endereco();
-            endereco.setRua(clienteComEnderecoDto.getRua());
-
-            enderecoService.inseriEndereco(endereco);
-            cliente.setEndereco(novoEndereco);
+            endereco.setCep(clienteComEnderecoDto.cep());
+            endereco.setRua(clienteComEnderecoDto.rua());
+            endereco.setNr(clienteComEnderecoDto.nr());
+            endereco.setBairro(clienteComEnderecoDto.bairro());
+            endereco.setCidade(clienteComEnderecoDto.cidade());
+            endereco.setEstado(clienteComEnderecoDto.estado());
+            return endereco;
         }
+    }
 
-        cliente.setNome(clienteComEnderecoDto.getNome());
-        clienteRepository.save(cliente);
+    private Cliente acharClienteByDetalhes(String nome, Integer idade, String telefone, String CPF) {
+        return clienteRepository.findClientByNomeAndIdadeAndTelefoneAndCPF(nome, idade, telefone, CPF);
+    }
+
+    private Cliente getClienteIfExits(ClienteComEnderecoDto clienteComEnderecoDto) {
+        Cliente existirCliente = acharClienteByDetalhes(clienteComEnderecoDto.nome(), clienteComEnderecoDto.idade(),
+                clienteComEnderecoDto.telefone(), clienteComEnderecoDto.CPF());
+
+        if (existirCliente != null) {
+            return existirCliente;
+        } else {
+            Cliente cliente = new Cliente();
+            cliente.setNome(clienteComEnderecoDto.nome());
+            cliente.setIdade(clienteComEnderecoDto.idade());
+            cliente.setTelefone(clienteComEnderecoDto.telefone());
+            cliente.setCPF(clienteComEnderecoDto.CPF());
+            return cliente;
+        }
     }
 
     public void atualizarCliente(Cliente cliente) {

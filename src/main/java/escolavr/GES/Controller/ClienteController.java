@@ -1,6 +1,7 @@
 package escolavr.GES.Controller;
 
 import ch.qos.logback.core.net.server.Client;
+import escolavr.GES.DTO.ClienteComEnderecoDto;
 import escolavr.GES.Service.ClienteService;
 import escolavr.GES.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class ClienteController {
     }
 
     @PostMapping
-    public ResponseEntity<String> inserirCliente(@RequestBody Cliente cliente) {
+    public ResponseEntity<String> inserirCliente(@RequestBody ClienteComEnderecoDto clienteComEnderecoDto) {
         try {
-            clienteService.inserirCliente(cliente);
+            clienteService.inserirCliente(clienteComEnderecoDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Cliente inserido com sucesso");
         }catch (Exception ex) {
             ex.printStackTrace();
