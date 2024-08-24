@@ -11,7 +11,7 @@ import java.util.Optional;
 @Repository
 public interface EnderecoRepository extends JpaRepository<Endereco, Integer> {
 
-    @Query("SELECT * FROM Endereco e WHERE e.cep = :cep AND e.rua = :rua AND e.nr = :nr AND " +
+    @Query("SELECT e FROM Endereco e WHERE e.cep = :cep AND e.rua = :rua AND e.nr = :nr AND " +
             "e.bairro = :bairro AND e.cidade = :cidade AND e.estado = :estado")
     Endereco findEnderecoByRuaAndCidadeAndEstadoAndCep(@Param("cep") Integer cep,
                                                        @Param("rua") String rua,

@@ -30,10 +30,23 @@ public class ClienteController {
         try {
             clienteService.inserirCliente(clienteComEnderecoDto);
             return ResponseEntity.status(HttpStatus.CREATED).body("Cliente inserido com sucesso");
-        }catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body("Erro ao inserir Cliente");
         }
+    }
+
+    @DeleteMapping
+    public ResponseEntity<String> deletarCliente(Integer id) {
+        try {
+            clienteService.deletarCliente(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Cliente deletado com sucesso");
+        } catch (Exception ex) {
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body("Erro ao deletar o cliente");
+        }
+
+
     }
 
 }

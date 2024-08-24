@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
 
-    @Query("SELECT * FROM Cliente c WHERE c.nome = :nome AND c.idade = :idade AND c.telefone = :telefone AND c.CPF = :CPF")
+    @Query("SELECT c FROM Cliente c WHERE c.nome = :nome AND c.idade = :idade AND c.telefone = :telefone AND c.CPF = :CPF")
     Cliente findClientByNomeAndIdadeAndTelefoneAndCPF(@Param("nome") String nome,
                                                       @Param("idade") Integer idade,
                                                       @Param("telefone") String telefone,

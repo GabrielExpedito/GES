@@ -1,6 +1,5 @@
 package escolavr.GES.Service;
 
-import ch.qos.logback.core.net.server.Client;
 import escolavr.GES.DTO.ClienteComEnderecoDto;
 import escolavr.GES.entity.Cliente;
 import escolavr.GES.entity.Endereco;
