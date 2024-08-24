@@ -38,8 +38,9 @@ public class ClienteService {
 
     public void inserirCliente(ClienteComEnderecoDto clienteComEnderecoDto) {
         Endereco endereco = getEnderecoIfExists(clienteComEnderecoDto);
-        enderecoService.inseriEndereco(endereco);
+        Endereco newEndereco = enderecoService.inseriEndereco(endereco);
         Cliente cliente = getClienteIfExits(clienteComEnderecoDto);
+        cliente.setEndereco(newEndereco);
         clienteRepository.save(cliente);
     }
 

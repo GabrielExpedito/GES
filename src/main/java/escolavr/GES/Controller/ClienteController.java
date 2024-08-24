@@ -1,13 +1,11 @@
 package escolavr.GES.Controller;
 
-import ch.qos.logback.core.net.server.Client;
 import escolavr.GES.DTO.ClienteComEnderecoDto;
 import escolavr.GES.Service.ClienteService;
 import escolavr.GES.entity.Cliente;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -55,8 +53,6 @@ public class ClienteController {
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body("Erro ao deletar o cliente");
         }
-
-
     }
 
 }
