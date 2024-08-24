@@ -25,6 +25,16 @@ public class ClienteController {
         return ResponseEntity.status(HttpStatus.OK).body(clienteService.obterClientes());
     }
 
+    @GetMapping("/{id}")
+    public ResponseEntity<Object> getCliente(@PathVariable(value = "id") Integer id) {
+        try {
+            Cliente cliente = clienteService.obterClienteByID(id);
+            return ResponseEntity.status(HttpStatus.OK).body(cliente);
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Cliente não encontrado");
+        }
+    }
+
     @PostMapping
     public ResponseEntity<String> inserirCliente(@RequestBody ClienteComEnderecoDto clienteComEnderecoDto) {
         try {
