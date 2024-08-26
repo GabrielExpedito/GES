@@ -17,7 +17,7 @@ public class Funcionario {
     @Column(name = "NRE", unique = true)
     private Integer NRE;
     private String nome;
-    private String carro;
+    private String cargo;
     private Integer porce_comissao;
 
 }
