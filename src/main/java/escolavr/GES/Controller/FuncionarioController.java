@@ -7,10 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.convert.ReadingConverter;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 import java.util.concurrent.ExecutionException;
@@ -25,7 +22,7 @@ public class FuncionarioController {
 
     @GetMapping
     public ResponseEntity<List<Funcionario>> getFuncionario() {
-            return ResponseEntity.status(HttpStatus.OK).body(funcionarioService.getFuncionario());
+        return ResponseEntity.status(HttpStatus.OK).body(funcionarioService.getFuncionario());
     }
 
     @PostMapping
@@ -36,13 +33,17 @@ public class FuncionarioController {
         } catch (Exception ex) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao inserir Funcionario");
         }
-
-
     }
 
-
-
-
+    @DeleteMapping
+    public ResponseEntity<String> deleteFuncionario(Integer NRE) {
+        try {
+            funcionarioService.deleteFuncionario(NRE);
+            return ResponseEntity.status(HttpStatus.OK).body("Funcionario deletado com sucesso");
+        } catch (Exception ex) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao deletar Funcionario");
+        }
+    }
 
 
 }

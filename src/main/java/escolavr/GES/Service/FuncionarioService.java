@@ -19,7 +19,25 @@ public class FuncionarioService {
     }
 
     public void inserirFuncionario(Funcionario funcionario) {
-        funcionarioRepository.save(funcionario);
+        Funcionario funcionarioExistente = getFuncionarioIfExists(funcionario);
+        if (funcionarioExistente == null) {
+            funcionarioRepository.save(funcionario);
+        } else {
+            System.out.println("Funcionário já existente");
+        }
+    }
+
+
+    private Funcionario getFuncionarioIfExists(Funcionario funcionario) {
+        return acharFuncionarioByDetales(funcionario.getNome(), funcionario.getCargo());
+    }
+
+    private Funcionario acharFuncionarioByDetales(String nome, String cargo) {
+        return funcionarioRepository.findFuncionarioByNomeAndCargo(nome, cargo);
+    }
+
+    public void deleteFuncionario(Integer NRE) {
+        funcionarioRepository.deleteById(NRE);
     }
 
 
