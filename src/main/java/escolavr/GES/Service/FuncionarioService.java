@@ -18,12 +18,12 @@ public class FuncionarioService {
         return funcionarioRepository.findAll();
     }
 
-    public void inserirFuncionario(Funcionario funcionario) {
+    public void inserirFuncionario(Funcionario funcionario) throws Exception{
         Funcionario funcionarioExistente = getFuncionarioIfExists(funcionario);
         if (funcionarioExistente == null) {
             funcionarioRepository.save(funcionario);
         } else {
-            System.out.println("Funcionário já existente");
+            throw new Exception("Funcionário já existente");
         }
     }
 

@@ -7,11 +7,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
 @Data
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
-public class Funcionario {
+public class Funcionario implements Serializable {
 
     @Id
     @Column(name = "NRE", unique = true)

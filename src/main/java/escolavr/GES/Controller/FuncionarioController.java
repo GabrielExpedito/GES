@@ -26,12 +26,12 @@ public class FuncionarioController {
     }
 
     @PostMapping
-    public ResponseEntity<String> inserirFuncionario(Funcionario funcionario) {
+    public ResponseEntity<String> inserirFuncionario(@RequestBody Funcionario funcionario) {
         try {
             funcionarioService.inserirFuncionario(funcionario);
             return ResponseEntity.status(HttpStatus.CREATED).body("Funcionario inserido com sucesso");
         } catch (Exception ex) {
-            return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Erro ao inserir Funcionario");
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(ex.getMessage());
         }
     }
 
