@@ -18,7 +18,7 @@ public class FuncionarioService {
         return funcionarioRepository.findAll();
     }
 
-    public void inserirFuncionario(Funcionario funcionario) throws Exception{
+    public void inserirFuncionario(Funcionario funcionario) throws Exception {
         Funcionario funcionarioExistente = getFuncionarioIfExists(funcionario);
         if (funcionarioExistente == null) {
             funcionarioRepository.save(funcionario);

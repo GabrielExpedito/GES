@@ -26,7 +26,9 @@ public class ProdutoService {
             throw new Exception("Produto já exitente");
         }
     }
-
+    public void deletarProduto(Integer id) {
+        produtoRepository.deleteById(id);
+    }
 
     private Produto getProdutoIfExists(Produto produto) {
         return acharProdutoByDetalhes(produto.getNome(), produto.getPreco(), produto.getCategoria());
@@ -35,5 +37,6 @@ public class ProdutoService {
     private Produto acharProdutoByDetalhes(String nome, Double preco, String categoria) {
         return produtoRepository.findProdutoByNomeAndPrecoAndCategoria(nome, preco, categoria);
     }
+
 
 }
