@@ -13,8 +13,8 @@ public class Produto {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "ID_produto", unique = true)
-    private Integer ID_produto;
+    @Column(name = "id", unique = true)
+    private Integer id;
     private String nome;
     private String descricao;
     private Double preco;

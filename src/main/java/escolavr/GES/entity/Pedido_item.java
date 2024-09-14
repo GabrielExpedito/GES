@@ -18,13 +18,24 @@ public class Pedido_item {
     @Column(name = "ID_pedido_item", unique = true)
     private Integer ID_pedido_item;
 
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date data_pedido;
-
     private Integer quantidade;
 
     private Double valor_total;
 
-    private Integer ID_produto;
+    @Column(name = "idProduto")
+    private Integer idProduto;
 
+    @OneToOne
+    @JoinColumn(name = "idProduto")
+    private Produto produto;
+
+    @ManyToOne
+    @JoinColumn(name = "NR_Ped", nullable = false)
+    private Pedido_Venda pedidoVenda;
+
+    public Pedido_item(Integer quantidade, Double valor_total, Integer idProduto) {
+        this.quantidade = quantidade;
+        this.valor_total = valor_total;
+        this.idProduto = idProduto;
+    }
 }
