@@ -28,6 +28,6 @@ public class Pedido_Venda {
     @Temporal(TemporalType.TIMESTAMP)
     private Date data_pedido;
 
-    @OneToMany(mappedBy = "Pedido_Venda", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "pedidoVenda", cascade = CascadeType.ALL)
     private List<Pedido_item> itens = new ArrayList<>();
 }

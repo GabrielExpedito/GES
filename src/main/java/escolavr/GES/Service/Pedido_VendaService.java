@@ -6,11 +6,13 @@ import escolavr.GES.entity.Pedido_Venda;
 import escolavr.GES.entity.Pedido_item;
 import escolavr.GES.repository.Pedido_VendaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+@Service
 public class Pedido_VendaService {
 
     @Autowired

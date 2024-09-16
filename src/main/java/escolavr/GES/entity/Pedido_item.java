@@ -22,7 +22,7 @@ public class Pedido_item {
 
     private Double valor_total;
 
-    @Column(name = "idProduto")
+    @Column(name = "idProduto", insertable = false, updatable = false)
     private Integer idProduto;
 
     @OneToOne
